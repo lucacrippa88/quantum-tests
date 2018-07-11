@@ -8,12 +8,16 @@
   <body>
 
     <script>
-      var bin1 = stringToBinary("=)");
-      var bin2 = stringToBinary(";)");
-      console.log(bin1);
-      console.log(bin2);
 
-      findPatterns(bin1, bin2);
+      var emo1 = "=)";
+      var emo2 = ";)";
+
+      var bin1 = stringToBinary(emo1);
+      var bin2 = stringToBinary(emo2);
+      console.log(emo1+" "+bin1);
+      console.log(emo2+" "+bin2);
+
+      findQGates(bin1, bin2);
 
     </script>
 
