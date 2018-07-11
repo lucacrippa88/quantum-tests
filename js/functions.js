@@ -91,11 +91,11 @@ function findQGates(emo1, emo2){
     // wtd = "H sotto, CNOT, X sopra";
   };
 
-  // console.log("Differences:");
-  // console.log(dif);
-  // console.log("Logic to apply: "+wtd);
-  // console.log("Quantum Gates:");
-  // console.log(instructions);
+  console.log("Differences:");
+  console.log(dif);
+  console.log("Logic to apply: "+wtd);
+  console.log("Quantum Gates:");
+  console.log(instructions);
 
   $("#bin-emo1").html(emo1+"&ensp; is &ensp;"+bin1+"<br>");
   $("#bin-emo2").html(emo2+"&ensp; is &ensp;"+bin2+"<br>");
