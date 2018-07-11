@@ -55,9 +55,15 @@ function findQGates(emo1, emo2){
   var arr_pos = dif.positions.split(",");
   var pos0 = arr_pos[0];
   var pos1 = arr_pos[1];
+  var pos2 = arr_pos[2];
   // Invert from right to left 0-based
   pos0 = arr1.length-parseInt(pos0)-1;
   pos1 = arr1.length-parseInt(pos1)-1;
+  pos2 = arr1.length-parseInt(pos2)-1;
+
+  console.log(pos0);
+  console.log(pos1);
+  console.log(pos2);
 
   // Check cases
   if (dif_str2.includes('"array1":"0","array2":"1"')) {
@@ -88,6 +94,14 @@ function findQGates(emo1, emo2){
     instructions.push("qc.h(qr["+pos1+"])");
     instructions.push("qc.cx(qr["+pos1+"],qr["+pos0+"])");
     instructions.push("qc.x(qr["+pos0+"])");
+    // wtd = "H sotto, CNOT, X sopra";
+  };
+  if (dif_str2.includes('"array1":"1,0,0","array2":"0,1,1"')) {
+    instructions.push("qc.h(qr["+pos0+"])");
+    instructions.push("qc.cx(qr["+pos0+"],qr["+pos1+"])");
+    instructions.push("qc.x(qr["+pos1+"])");
+    instructions.push("qc.cx(qr["+pos0+"],qr["+pos2+"])");
+    instructions.push("qc.x(qr["+pos2+"])");
     // wtd = "H sotto, CNOT, X sopra";
   };
 
