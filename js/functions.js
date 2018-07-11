@@ -17,8 +17,6 @@ function findQGates(emo1, emo2){
 
   var bin1 = stringToBinary(emo1);
   var bin2 = stringToBinary(emo2);
-  console.log(emo1+" "+bin1);
-  console.log(emo2+" "+bin2);
 
   // Split binary into arrays
   var arr1 = bin1.split("");
@@ -47,68 +45,43 @@ function findQGates(emo1, emo2){
   dif.array2 = dif.array2.substring(0, dif.array2.length - 1);
   dif.positions = dif.positions.substring(0, dif.positions.length - 1);
 
-  var dif_str2 = JSON.stringify(dif);
-
-  var wtd = "";
-
   // Extract differences positions
   var arr_pos = dif.positions.split(",");
-  var pos0 = arr_pos[0];
-  var pos1 = arr_pos[1];
-  var pos2 = arr_pos[2];
-  // Invert from right to left 0-based
-  pos0 = arr1.length-parseInt(pos0)-1;
-  pos1 = arr1.length-parseInt(pos1)-1;
-  pos2 = arr1.length-parseInt(pos2)-1;
+  var arr_emo1 = dif.array1.split(",");
+  var arr_emo2 = dif.array2.split(",");
 
-  console.log(pos0);
-  console.log(pos1);
-  console.log(pos2);
+  for (var i = 0; i < arr_pos.length; i++) {
+    arr_pos[i] = 16-arr_pos[i]-1;
+    arr_emo1[i] = parseInt(arr_emo1[i]);
+    arr_emo2[i] = parseInt(arr_emo2[i]);
+  }
+
+  console.log(arr_pos);
+  console.log(arr_emo1);
+  console.log(arr_emo2);
+
+  instructions.push("qc.h(qr["+arr_pos[0]+"])");
+
+  for(var i = 1; i < arr_pos.length; i++){
+
+    if (arr_emo1[i] == arr_emo1[0]) {
+      instructions.push("qc.cx(qr["+arr_pos[0]+"],qr["+arr_pos[i]+"])");
+    }
+    else {
+      instructions.push("qc.cx(qr["+arr_pos[0]+"],qr["+arr_pos[i]+"])");
+      instructions.push("qc.x(qr["+arr_pos[i]+"])");
+    }
+
+  }
+
+// qc.cx(qr[6],qr[0])
 
   // Check cases
-  if (dif_str2.includes('"array1":"0","array2":"1"')) {
-    instructions.push("qc.h(qr["+pos0+"])");
-    // wtd = "H sotto";
-  };
-  if (dif_str2.includes('"array1":"1","array2":"0"')) {
-    instructions.push("qc.h(qr["+pos0+"])");
-    // wtd = "H sopra";
-  };
-  if (dif_str2.includes('"array1":"1,1","array2":"0,0"')) {
-    instructions.push("qc.h(qr["+pos1+"])");
-    instructions.push("qc.cx(qr["+pos1+"],qr["+pos0+"])");
-    // wtd = "H sotto, CNOT";
-  };
-  if (dif_str2.includes('"array1":"0,0","array2":"1,1"')) {
-    instructions.push("qc.h(qr["+pos0+"])");
-    instructions.push("qc.cx(qr["+pos0+"],qr["+pos1+"])");
-    // wtd = "H sopra, CNOT";
-  };
-  if (dif_str2.includes('"array1":"0,1","array2":"1,0"')) {
-    instructions.push("qc.h(qr["+pos0+"])");
-    instructions.push("qc.cx(qr["+pos0+"],qr["+pos1+"])");
-    instructions.push("qc.x(qr["+pos1+"])");
-    // wtd = "H sopra, CNOT, X sotto";
-  };
-  if (dif_str2.includes('"array1":"1,0","array2":"0,1"')) {
-    instructions.push("qc.h(qr["+pos1+"])");
-    instructions.push("qc.cx(qr["+pos1+"],qr["+pos0+"])");
-    instructions.push("qc.x(qr["+pos0+"])");
-    // wtd = "H sotto, CNOT, X sopra";
-  };
-  if (dif_str2.includes('"array1":"1,0,0","array2":"0,1,1"')) {
-    instructions.push("qc.h(qr["+pos0+"])");
-    instructions.push("qc.cx(qr["+pos0+"],qr["+pos1+"])");
-    instructions.push("qc.x(qr["+pos1+"])");
-    instructions.push("qc.cx(qr["+pos0+"],qr["+pos2+"])");
-    instructions.push("qc.x(qr["+pos2+"])");
-    // wtd = "H sotto, CNOT, X sopra";
-  };
 
-  console.log("Differences:");
-  console.log(dif);
-  console.log("Logic to apply: "+wtd);
-  console.log("Quantum Gates:");
+  // console.log("Differences:");
+  // console.log(dif);
+  // console.log("Logic to apply: "+wtd);
+  // console.log("Quantum Gates:");
   console.log(instructions);
 
   $("#bin-emo1").html(emo1+"&ensp; is &ensp;"+bin1+"<br>");
