@@ -3,21 +3,38 @@
 
 <head>
   <script src="js/functions.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 
   <body>
 
+    <center>
+
+      <h1>Smiley quantizer</h1>
+
+      <br><br>
+
+      <input type="text" size="3" placeholder="Smile" id="emo1">
+      <input type="text" size="3" placeholder="Smile" id="emo2">
+
+      <button type="submit" id="go">QUANTIZE!</button>
+
+      <br><br><br><br>
+      <div id="bin-emo1"></div>
+      <div id="bin-emo2"></div>
+      <br>
+      <div id="quantized"></div>
+
+    </center>
+
     <script>
 
-      var emo1 = "=)";
-      var emo2 = ";)";
+      $("#go").click(function(){
+        var emo1 = $('#emo1').val();
+        var emo2 = $('#emo2').val();
+        findQGates(emo1, emo2);
+      });
 
-      var bin1 = stringToBinary(emo1);
-      var bin2 = stringToBinary(emo2);
-      console.log(emo1+" "+bin1);
-      console.log(emo2+" "+bin2);
-
-      findQGates(bin1, bin2);
 
     </script>
 
