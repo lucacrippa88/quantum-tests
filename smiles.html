@@ -18,7 +18,8 @@
     <div class="row">
 
       <div class="col l12 s12">
-        <h1><img src="img/qiskit.gif" width="45px">&thinsp;Emoticon quantizer</h1> First try to automatize Quantum Gate creation for IBM Q on QISKit
+        <h1><img src="img/qiskit.gif" width="45px">&thinsp;Emoticon quantizer</h1>
+        First try to automatize Quantum Gate creation for IBM Q on QISKit
         <br><br>
       </div>
 
@@ -47,12 +48,12 @@
         <div class="col l8 s12">
 
           <button class="btn waves-effect waves-light" type="submit" name="action" id="go">Quantize
-            <i class="material-icons right">memory</i>
-        </button>
-          <button class="btn waves-effect waves-light" type="submit" name="action" id="reset">Reset
-            <i class="material-icons right">refresh</i>
-        </button>
-          <br><br>
+              <i class="material-icons right">memory</i>
+          </button>
+            <button class="btn waves-effect waves-light" type="submit" name="action" id="reset">Reset
+              <i class="material-icons right">refresh</i>
+          </button>
+        <br><br>
 
         </div>
 
@@ -62,7 +63,6 @@
 
         <input type="text" id="bin-emo1" style="display:none" disabled>
         <input type="text" id="bin-emo2" style="display:none" disabled>
-
         <br>
 
         <div class="card" id="quantized-card" style="display:none">
@@ -78,12 +78,9 @@
           </div>
         </div>
 
-
       </div>
 
     </div>
-
-
 
   </div>
 
@@ -91,6 +88,7 @@
 
 
   <script>
+    // Select number of emoticons
     $('input[name=radio]').change(function() {
       if ($("#check2:checked").val()) {
         $("#emo3").css("display", "none");
@@ -101,29 +99,22 @@
     });
 
 
-
+    // Perform quantization
     $("#go").click(function() {
       $("#quantized").empty();
       var emo1 = $('#emo1').val();
       var emo2 = $('#emo2').val();
       var emo3 = $('#emo3').val();
-
-      if ($("#check2:checked").val()) {
-        findQGates2(emo1, emo2);
-      }
-      if ($("#check3:checked").val()) {
-        // findQGates2(emo1, emo2, emo3);
-        alert("Non siamo ancora pronti...");
-      }
-
+      if ($("#check2:checked").val()) { findQGates2(emo1, emo2); }
+      if ($("#check3:checked").val()) { alert("We are working on this!"); }
     });
 
+    // Reload page
     $("#reset").click(function() {
       location.reload();
     });
 
-
-
+    // Copy quantum gates to clipboard
     function copyToClipboard(element) {
       var $temp = $("<input>");
       $("body").append($temp);
