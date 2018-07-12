@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+
+<head>
+  <script src="js/functions.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+  <body>
+
+    <center>
+
+      <h1>Smiley quantizer</h1>
+      First try to automatize Quantum Gate creation for IBM Q on QISKit
+      <br><br><br>
+
+      <input type="text" size="3" placeholder="Smile 1" id="emo1">
+      <input type="text" size="3" placeholder="Smile 2" id="emo2">
+      <input type="text" size="3" placeholder="Smile 3" id="emo3">
+      <br><br>
+
+      <button type="submit" id="go">QUANTIZE!</button>
+      <button type="submit" id="reset">Reset</button>
+      <br><br><br>
+
+      <div id="bin-emo1" style="font-size:x-large;text-align:right;margin-right:35%;"></div>
+      <div id="bin-emo2" style="font-size:x-large;text-align:right;margin-right:35%;"></div>
+      <br><br>
+
+      <div id="quantized"></div>
+
+    </center>
+
+    <script>
+      $("#go").click(function(){
+        $("#quantized").empty();
+        var emo1 = $('#emo1').val();
+        var emo2 = $('#emo2').val();
+        var emo3 = $('#emo3').val();
+        findQGates3(emo1, emo2, emo3);
+      });
+
+      $("#reset").click(function(){
+        location.reload();
+      });
+    </script>
+
+
+  </body>
+
+</html>

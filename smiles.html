@@ -1,0 +1,145 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="js/functions.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+</head>
+
+<body>
+
+
+  <div class="container">
+
+    <div class="row">
+
+      <div class="col l12 s12">
+        <h1><img src="img/qiskit.gif" width="45px">&thinsp;Emoticon quantizer</h1>
+        First try to automatize Quantum Gate creation for IBM Q on QISKit
+        <br><br>
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <div class="col l6 s12">
+
+        <input type="text" placeholder="Emoticon 1" id="emo1" maxlength="2">
+        <input type="text" placeholder="Emoticon 2" id="emo2" maxlength="2">
+        <input type="text" placeholder="Emoticon 3" id="emo3" maxlength="2" style="display:none">
+        <br><br>
+
+        <div class="col l4 s12">
+          <label>
+            <input name="radio" id="check2" type="radio" checked />
+            <span>2 Emoticons</span>
+          </label> &ensp;
+          <label>
+            <input name="radio" id="check3" type="radio" />
+            <span>3 Emoticons</span>
+          </label>
+        </div>
+        <!-- <br><br> -->
+
+        <div class="col l8 s12">
+
+          <button class="btn waves-effect waves-light" type="submit" name="action" id="go">Quantize
+            <i class="material-icons right">memory</i>
+        </button>
+          <button class="btn waves-effect waves-light" type="submit" name="action" id="reset">Reset
+            <i class="material-icons right">refresh</i>
+        </button>
+
+        <br><br>
+
+        </div>
+
+      </div>
+
+      <div class="col l6 s12">
+
+        <input type="text" id="bin-emo1" style="display:none" disabled>
+        <input type="text" id="bin-emo2" style="display:none" disabled>
+
+        <br>
+
+        <div class="card" id="quantized-card" style="display:none">
+          <div class="card-content">
+            <span class="card-title">Quantum Algorithm</span>
+            <p id="quantized"></p>
+          </div>
+          <div class="card-action">
+            <button onclick="copyToClipboard('#quantized')" class="btn-small waves-effect waves-light" type="submit" name="action" id="reset">Copy
+                <i class="material-icons right">file_copy</i>
+            </button>
+            <span id="copied" style="display:none;font-size:small;">&ensp;<i>Copied to clipboard!</i></span>
+          </div>
+        </div>
+
+
+      </div>
+
+    </div>
+
+
+
+  </div>
+
+
+
+
+  <script>
+    $('input[name=radio]').change(function() {
+      if ($("#check2:checked").val()) {
+        $("#emo3").css("display", "none");
+      }
+      if ($("#check3:checked").val()) {
+        $("#emo3").css("display", "block");
+      }
+    });
+
+
+
+    $("#go").click(function() {
+      $("#quantized").empty();
+      var emo1 = $('#emo1').val();
+      var emo2 = $('#emo2').val();
+      var emo3 = $('#emo3').val();
+
+      if ($("#check2:checked").val()) {
+        findQGates2(emo1, emo2);
+      }
+      if ($("#check3:checked").val()) {
+        // findQGates2(emo1, emo2, emo3);
+        alert("Non siamo ancora pronti...");
+      }
+
+    });
+
+    $("#reset").click(function() {
+      location.reload();
+    });
+
+
+
+    function copyToClipboard(element) {
+      var $temp = $("<input>");
+      $("body").append($temp);
+      $temp.val($(element).text()).select();
+      document.execCommand("copy");
+      $temp.remove();
+      $("#copied").css("display", "inline");
+    }
+  </script>
+
+
+</body>
+
+</html>
