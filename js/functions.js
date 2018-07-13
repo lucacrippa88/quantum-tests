@@ -88,6 +88,7 @@ function findQGates2(emo1, emo2){
   }
 
   $("#quantized-card").css("display", "block");
+  $("#quantized-result").css("display", "block");
 
 }
 
