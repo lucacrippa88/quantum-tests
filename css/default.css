@@ -1,0 +1,13 @@
+.vl { display: none; }
+
+@media all and (min-width: 1200px) {
+
+  .vl {
+      border-left: 2px dashed grey;
+      height: 500px;
+      display: block;
+      left: 40px;
+      position: relative;
+  }
+
+}
