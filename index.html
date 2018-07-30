@@ -2,48 +2,97 @@
 <html>
 
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="js/functions.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+  <link rel="stylesheet" href="css/default.css">
 </head>
 
-  <body>
-
-    <center>
-
-      <h1>Smiley quantizer</h1>
-      First try to automatize Quantum Gate creation for IBM Q on QISKit
-      <br><br><br>
-
-      <input type="text" size="3" placeholder="Smile 1" id="emo1">
-      <input type="text" size="3" placeholder="Smile 2" id="emo2">
-      <br><br>
-
-      <button type="submit" id="go">QUANTIZE!</button>
-      <button type="submit" id="reset">Reset</button>
-      <br><br><br>
-
-      <div id="bin-emo1" style="font-size:x-large;text-align:right;margin-right:35%;"></div>
-      <div id="bin-emo2" style="font-size:x-large;text-align:right;margin-right:35%;"></div>
-      <br><br>
-
-      <div id="quantized"></div>
-
-    </center>
-
-    <script>
-      $("#go").click(function(){
-        $("#quantized").empty();
-        var emo1 = $('#emo1').val();
-        var emo2 = $('#emo2').val();
-        findQGates(emo1, emo2);
-      });
-      
-      $("#reset").click(function(){
-        location.reload();
-      });
-    </script>
+<body>
 
 
-  </body>
+  <div class="container" style="width:80%!important;">
+
+    <div class="row">
+
+      <div class="col l12 s12">
+        <h1><img src="img/qiskit.gif" width="45px">&thinsp;Emoticon quantizer</h1>
+        Our first unofficial try to automatize Quantum Gate creation for IBM Q on QISKit for superposition purposes.
+        <br><br>
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <div class="col l4 s12">
+        <div class="row">
+          <div class="col l5 s12">
+            <input type="text" placeholder="Emoticon 1" id="emo1" maxlength="2">
+            <input type="text" placeholder="Emoticon 2" id="emo2" maxlength="2">
+            <input type="text" placeholder="Emoticon 3" id="emo3" maxlength="2" style="display:none">
+          </div>
+          <div class="col l7 s12">
+            <input type="text" id="bin-emo1" style="display:none" disabled>
+            <input type="text" id="bin-emo2" style="display:none" disabled>
+            <input type="text" id="bin-emo3" style="display:none" disabled>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col l12 s12">
+            <label>
+              <input name="radio" id="check2" type="radio" checked />
+              <span>2 Emoticons</span>
+            </label> &ensp;
+            <label>
+              <input name="radio" id="check3" type="radio" />
+              <span>3 Emoticons</span>
+            </label>
+            <br><br>
+            <button class="btn waves-effect waves-light" type="submit" name="action" id="go">Quantize
+                <i class="material-icons right">memory</i>
+            </button>
+              <button class="btn waves-effect waves-light" type="submit" name="action" id="reset">Reset
+                <i class="material-icons right">refresh</i>
+            </button>
+            <br><br>
+            <div class="switch">
+              <label>
+                Simulate
+                <input type="checkbox" id="run">
+                <span class="lever"></span>
+                Run on Q
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col l1 s1 show-desktop">
+        <div class="vl"></div>
+      </div>
+      <div class="col l3 s12">
+        <div class="card" id="quantized-card" style="display:none">
+          <div class="card-content">
+            <span class="card-title">QASM Algorithm</span>
+            <p id="quantized"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // Select number of emoticons
+    // selectNumber();
+    refreshPage();
+    callQ();
+  </script>
+
+
+</body>
 
 </html>
